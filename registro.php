@@ -20,13 +20,15 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Registro</title>
+        <title>Registro de cliente</title>
 
     </head>
 
     <body>
+       
         <form action="" method="post">
             <fieldset>
+                <legend><h1>Registro de usuario</h1></legend>
                 * <input type="text" name="primer_nombre" id="primer_nombre" placeholder="Primer nombre" required="required">
                 <input type="text" name="segundo_nombre" id="segundo_nombre" placeholder="Segundo nombre"><br/><br/>
                 * <input type="text" name="primer_apellido" id="primer_apellido" placeholder="Primer apellido" required="required">
@@ -50,8 +52,9 @@
 
             </fieldset>
         </form>
+
             <?php 
-                if(isset($_POST["boton"])){
+                if(isset($_POST["boton"]) && $_POST["boton"] == "Registrar"){
 
                     $rol=0;
                     include 'conexion.php';
@@ -81,8 +84,7 @@
                             
                         }else{
                             echo '<script type="text/javascript">alert("Error al registrar.");</script>';
-                        }
-                                
+                        }    
                     }
                 }
             ?>

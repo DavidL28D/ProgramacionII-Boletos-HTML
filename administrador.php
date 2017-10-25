@@ -18,7 +18,7 @@
     <head>
 
         <meta charset="UTF-8">
-        <title></title>
+        <title>Administrador</title>
 
     </head>
 
@@ -30,8 +30,9 @@
         <form action="" method="post">
             <fieldset>
                 <legend>Menú Principal</legend>
-                <a href="listado.php">Ver listado de Registros de asistencia</a><br>
-                <a href="registrar_boleto.php">Registrar boleto</a><br/><br/>
+                <a href="listado.php">Ver listado de Registros de asistencia por eventos</a><br><br/>
+                <a href="registrar_evento.php">Registrar Evento</a><br/><br/>
+                <a href="registrar_boleto.php">Registrar Boleto</a><br/><br/>
                 <input type="submit" name="boton" value="Cerrar Sesion">
             </fieldset>
         </form>

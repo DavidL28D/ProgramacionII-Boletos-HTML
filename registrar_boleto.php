@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <?php
+    include 'conexion.php';
     session_start();
     ///*
     if(!isset($_SESSION["Rol"])){
@@ -22,38 +23,63 @@
 
     <body>
 
-        <h1>Sistema de registro</h1>
+        <h1>Registro de boletos</h1>
 
         <form action="" method="post">
+
             <input type="number" name="serial" id="serial" placeholder="Serial" required="required"><br/><br/>
 
             <?php
                 if($_SESSION["Rol"] == 1){
-                    include 'conexion.php';
-                    $conexion= new Conectar();
+
+                    $conexion = new Conectar();
                     $conexion->ConectarBD();
-                    $sql=" select * from clientes order by Usuario";
-                    $resultado=$conexion->getConexion()->query($sql);
-                    if($resultado->num_rows>0){
+
+                    $peticion = "select * from clientes order by Usuario";
+                    $resultado = $conexion->getConexion()->query($peticion);
+
+                    if($resultado->num_rows > 0){
                         
                         echo 'Seleccione Usuario: <select name="usuario" id="usuario">';
-                         while($user=$resultado->fetch_assoc()){
-                             if($user["Usuario"]!="admin"){
-                                 echo "<option value=".$user["Usuario"].">".$user["Usuario"]."</option>";
+
+                         while($usuario = $resultado->fetch_assoc()){
+                             if($usuario["Rol"] != 1){
+                                 echo "<option value=".$usuario["Usuario"].">".$usuario["Usuario"]."</option>";
                              }
                              
                          }
                         
                         echo'</select><br><br>';
+
+                    }else{
+                        echo '<script type="text/javascript">alert("Aun no existen clientes.");</script>';
                     }
                     
                 }
+
+                $conexion = new Conectar();
+                $conexion->ConectarBD();
+
+                $peticion = "select * from eventos order by Nombre";
+                $resultado = $conexion->getConexion()->query($peticion);
+
+                if($resultado->num_rows > 0){
+                    
+                    echo 'Seleccione Evento: <select name="evento" id="evento">';
+
+                     while($evento = $resultado->fetch_assoc()){
+                        echo '<option value="'.$evento["Nombre"].'">'.$evento["Nombre"].'</option>';
+                     }
+                    
+                    echo'</select><br><br>';
+
+                }else{
+                    echo '<script type="text/javascript">alert("Aun no existen eventos.");</script>';
+                }
+
             ?>
 
-            <input type="text" name="nombre" id="nombre" placeholder="Nombre del evento" required="required"><br/><br/>
-            <input type="date" name="fecha" id="fecha" placeholder="AAAA/MM/DD" required="required"><br/><br/>
-
-            Seleccione su ubicacion: 
+            Seleccione ubicacion: 
                 <select name="ubicacion" id="ubicacion">
                     <option value="0">Altos</option>
                     <option value="1">Medios</option>
@@ -68,26 +94,27 @@
             if(isset($_POST["boton"]) && $_POST["boton"] == "Registrar"){
 
                 if($_SESSION["Rol"] == 1){
-                    $name = $_POST["usuario"];
-               }else if($_SESSION["Rol"] == 0){
-                   $name = $_SESSION["Usuario"];
-               }
-
+                    $usuario = $_POST["usuario"];
+                }else if($_SESSION["Rol"] == 0){
+                    $usuario = $_SESSION["Usuario"];
+                }
+                
                 $peticion = "select * from boletos where Serial='".$_POST["serial"]."'";
                 $resultado = $conexion->getConexion()->query($peticion);
 
-                $haveUser = "select * from clientes where Usuario='".$name."'";
-                $result = $conexion->getConexion()->query($haveUser);
-
-                if($resultado->num_rows>0){
+                if($resultado->num_rows > 0){
                     echo '<script type="text/javascript">alert("El boleto ya se encuentra registrado.");</script>';
 
-                }else if ($result->num_rows > 0){
+                }else{
 
-                    $peticion = "insert into boletos values('".$_POST["serial"]."',"."'".$_POST["nombre"]."',"."'".$_POST["fecha"]."',"."'".$_POST["ubicacion"]."',"."'".$name."') ";
-                    $resultado=$conexion->getConexion()->query($peticion);
+                    $peticion = "select * from eventos where Nombre='".$_POST["evento"]."'";
+                    $resultado = $conexion->getConexion()->query($peticion);
+                    $fecha = $resultado->fetch_assoc();
+
+                    $peticion = "insert into boletos values( '".$_POST["serial"]."','".$_POST["evento"]."','".$fecha["Fecha"]."','".$_POST["ubicacion"]."','".$usuario."')";
+                    $resultado = $conexion->getConexion()->query($peticion);
                     
-                    if($conexion->getConexion()->affected_rows>0){
+                    if($resultado->affected_rows > 0){
                         echo '<script type="text/javascript">alert("Boleto registrado correctamente.");</script>';
                         header("location:index.php");
                         
@@ -95,8 +122,6 @@
                         echo '<script type="text/javascript">alert("Error al registrar.");</script>';
                     }
                             
-                }else{
-                    echo '<script type="text/javascript">alert("No existe ese usuario registrado.");</script>';
                 }
 
             }

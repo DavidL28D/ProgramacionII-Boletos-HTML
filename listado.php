@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <?php
     session_start();
     ///*
@@ -10,18 +12,18 @@
     }
     //*/
 ?>
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <html>
+
     <head>
+
         <meta charset="UTF-8">
-        <title></title>
+        <title>Listado de eventos</title>
+
     </head>
+
     <body>
+
         <h1>Listado de Eventos</h1>
         
         <?php
@@ -53,7 +55,7 @@ and open the template in the editor.
                         if($tabla2["Ubicacion"]==3){
                             $ubicacion="Platino";
                         }
-                        echo "<td>".$tabla["Nombres"]."</td> &nbsp&nbsp  <td>".$tabla["Apellidos"]."</td> &nbsp&nbsp<td> ".$tabla["Cedula"]."</td> &nbsp&nbsp<td>".$tabla2["Nombre_Evento"]."</td> &nbsp&nbsp<td>".$ubicacion.
+                        echo "<td>".$tabla["Nombres"]."</td> &nbsp&nbsp  <td>".$tabla["Apellidos"]."</td> &nbsp&nbsp<td> ".$tabla["Cedula"]."</td> &nbsp&nbsp<td>".$tabla2["Nombre"]."</td> &nbsp&nbsp<td>".$ubicacion.
                                 '</td> &nbsp&nbsp<td> <a  href="detalles.php?user='.$tabla["Usuario"].'&event='.$tabla2["Serial"].'">Detalles</a>  <a href="editar.php?event='.$tabla2["Serial"].'">Editar</a>  <a href="eliminar.php?boleto='.$tabla2["Serial"].'">Borrar</a></td><br>';
 
                     }

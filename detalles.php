@@ -62,8 +62,9 @@
                     $fila=mysqli_fetch_array($resultado,MYSQLI_ASSOC);
 
                     echo "Serial: ".$fila["Serial"]."<br/>";
-                    echo "Nombre del evento: ".$fila["Nombre_Evento"]."<br/>";
+                    echo "Nombre del evento: ".$fila["Nombre"]."<br/>";
                     echo "Fecha: ".$fila["Fecha"]."<br/>";
+                    
                     if($fila["Ubicacion"] == 0){
                         echo "Ubicacion: Altos.<br/>";
                     }else if($fila["Ubicacion"] == 1){
