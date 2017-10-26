@@ -91,6 +91,7 @@
 
                 }else{
                     echo '<script type="text/javascript">alert("Aun no existen eventos.");</script>';
+                    
                 }
 
                 $sql = "select * from eventos where Nombre='".$variable."'";
@@ -132,7 +133,7 @@
                     $resultado = $conexion->getConexion()->query($peticion);
                     $registro = $resultado->fetch_assoc();
                     
-                    switch($_GET["evento"]){
+                    switch($_GET["ubicacion"]){
 
                         case 0: //Altos
                             if($registro["Altos"] > 0){
