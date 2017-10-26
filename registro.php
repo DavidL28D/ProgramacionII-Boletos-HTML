@@ -75,6 +75,7 @@
                                 ."'".$_POST["sexo"]."',"."'".$_POST["telefono"]."',"
                                 ."'".$_POST["correo"]."',"."'".$_POST["user"]."',"
                                 ."'".$_POST["pass"]."',"."'".$rol."') ";
+                                
                         $resultado=$conec->getConexion()->query($peticion);
                         
                         if($conec->getConexion()->affected_rows>0){

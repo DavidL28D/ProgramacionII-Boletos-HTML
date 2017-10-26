@@ -5,7 +5,7 @@
     ///*
     if(!isset($_SESSION["Rol"])){
         header("location:cerrar.php");
-    }else if($_SESSION["Rol"] != 0){
+    }else if($_SESSION["Rol"] != 1){
         header("location:index.php");
     }
     //*/
@@ -28,14 +28,14 @@
 
         <form action="" method="post">
 
-            <p>Nombre del evento: <input type="text" name="nombre" id="nombre" required="required"></p>
+            <p>Nombre del evento: <input type="text" name="nombre" id="nombre" required="required" <?php  ?>></p>
             <p>Fecha del evento: <input type="date" name="fecha" id="fecha" required="required"></p>
 
             Disponibilidad: <br/><br/>
-            Altos: <input type="number" name="altos" id="altos" required="required"><br/>
-            Medios: <input type="number" name="medios" id="medios" required="required"><br/>
-            VIP: <input type="number" name="vip" id="vip" required="required"><br/>
-            Platino: <input type="number" name="platino" id="platino" required="required"><br/><br/>
+            <input type="number" name="altos" id="altos" required="required"> altos<br/>
+            <input type="number" name="medios" id="medios" required="required"> Medios<br/>
+            <input type="number" name="vip" id="vip" required="required"> Vip<br/>
+            <input type="number" name="platino" id="platino" required="required"> Platino<br/><br/>
 
             <input type="submit" name="boton" value="Registrar">
 
@@ -56,7 +56,7 @@
                     $peticion = "select * from eventos where Nombre='".$_POST["nombre"]."'";
                     $resultado = $conexion->getConexion()->query($peticion);
     
-                    if($resultado->num_rows>0){
+                    if($resultado->num_rows > 0){
                         echo '<script type="text/javascript">alert("El evento ya se encuentra registrado.");</script>';
     
                     }else{

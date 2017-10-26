@@ -25,7 +25,7 @@
 
         <h1>Registro de boletos</h1>
 
-        <form action="" method="post">
+        <form action="" method="get">
 
             <input type="number" name="serial" id="serial" placeholder="Serial" required="required"><br/><br/>
 
@@ -65,10 +65,26 @@
 
                 if($resultado->num_rows > 0){
                     
-                    echo 'Seleccione Evento: <select name="evento" id="evento">';
-
+                    echo 'Seleccione Evento: <select name="evento" id="evento" onchange="cambiar()">';
+                    
+                    $i = 0;
                      while($evento = $resultado->fetch_assoc()){
-                        echo '<option value="'.$evento["Nombre"].'">'.$evento["Nombre"].'</option>';
+
+                        if(isset($_GET["event"])){
+                            if($_GET["event"] == $evento["Nombre"]){
+                                echo '<option value="'.$evento["Nombre"].'" selected="selected">'.$evento["Nombre"].'</option>';
+                                $variable = $evento["Nombre"];
+                            }else{
+                                echo '<option value="'.$evento["Nombre"].'">'.$evento["Nombre"].'</option>';
+                            }
+                        }else{
+                            echo '<option value="'.$evento["Nombre"].'">'.$evento["Nombre"].'</option>';
+                            if($i == 0){
+                                $variable = $evento["Nombre"];
+                                $i=1;
+                            }
+                        }
+                        
                      }
                     
                     echo'</select><br><br>';
@@ -76,6 +92,11 @@
                 }else{
                     echo '<script type="text/javascript">alert("Aun no existen eventos.");</script>';
                 }
+
+                $sql = "select * from eventos where Nombre='".$variable."'";
+                $resultado = $conexion->getConexion()->query($sql);
+                $registro = mysqli_fetch_array($resultado, MYSQLI_ASSOC);
+                echo "Disponibilidad: Altos: ".$registro["Altos"].", Medios: ".$registro["Medios"].", VIP: ".$registro["Vip"].", Platino: ".$registro["Platino"]." <br/><br/>";
 
             ?>
 
@@ -91,15 +112,15 @@
         </form>
 
         <?php
-            if(isset($_POST["boton"]) && $_POST["boton"] == "Registrar"){
+            if(isset($_GET["boton"]) && $_GET["boton"] == "Registrar"){
 
                 if($_SESSION["Rol"] == 1){
-                    $usuario = $_POST["usuario"];
+                    $usuario = $_GET["usuario"];
                 }else if($_SESSION["Rol"] == 0){
                     $usuario = $_SESSION["Usuario"];
                 }
                 
-                $peticion = "select * from boletos where Serial='".$_POST["serial"]."'";
+                $peticion = "select * from boletos where Serial='".$_GET["serial"]."'";
                 $resultado = $conexion->getConexion()->query($peticion);
 
                 if($resultado->num_rows > 0){
@@ -107,25 +128,92 @@
 
                 }else{
 
-                    $peticion = "select * from eventos where Nombre='".$_POST["evento"]."'";
+                    $peticion = "select * from eventos where Nombre='".$_GET["evento"]."'";
                     $resultado = $conexion->getConexion()->query($peticion);
-                    $fecha = $resultado->fetch_assoc();
-
-                    $peticion = "insert into boletos values( '".$_POST["serial"]."','".$_POST["evento"]."','".$fecha["Fecha"]."','".$_POST["ubicacion"]."','".$usuario."')";
-                    $resultado = $conexion->getConexion()->query($peticion);
+                    $registro = $resultado->fetch_assoc();
                     
-                    if($resultado->affected_rows > 0){
-                        echo '<script type="text/javascript">alert("Boleto registrado correctamente.");</script>';
-                        header("location:index.php");
-                        
-                    }else{
-                        echo '<script type="text/javascript">alert("Error al registrar.");</script>';
+                    switch($_GET["evento"]){
+
+                        case 0: //Altos
+                            if($registro["Altos"] > 0){
+
+                                $numero = $registro["Altos"] - 1;
+                                $sql = "update eventos set Altos='".$numero."' where Nombre= '".$_GET["evento"]."'";
+                                $resultado = $conexion->getConexion()->query($sql);
+                                $flag = true;
+
+                            }else{
+                                $flag = false;
+                            }
+                        break;
+
+                        case 1: //Medios
+                            if($registro["Medios"] > 0){
+
+                                $numero = $registro["Medios"] - 1;
+                                $sql = "update eventos set Medios='".$numero."' where Nombre= '".$_GET["evento"]."'";
+                                $resultado = $conexion->getConexion()->query($sql);
+                                $flag = true;
+
+                            }else{
+                                $flag = false;
+                            }
+                        break;
+
+                        case 2: //Vip
+                            if($registro["Vip"] > 0){
+                                
+                                $numero = $registro["Vip"] - 1;
+                                $sql = "update eventos set Vip='".$numero."' where Nombre= '".$_GET["evento"]."'";
+                                $resultado = $conexion->getConexion()->query($sql);
+                                $flag = true;
+
+                            }else{
+                                $flag = false;
+                            }
+                        break;
+
+                        case 3: //Platino
+                            if($registro["Platino"] > 0){
+                                
+                                $numero = $registro["Platino"] - 1;
+                                $sql = "update eventos set Platino='".$numero."' where Nombre= '".$_GET["evento"]."'";
+                                $resultado = $conexion->getConexion()->query($sql);
+                                $flag = true;
+
+                            }else{
+                                $flag = false;
+                            }
+                        break;
                     }
+
+                    if($flag){
+                        $peticion = "insert into boletos values( '".$_GET["serial"]."','".$_GET["evento"]."','".$registro["Fecha"]."','".$_GET["ubicacion"]."','".$usuario."')";
+                        $resultado = $conexion->getConexion()->query($peticion);
+                        
+                        if($resultado->affected_rows > 0){
+                            echo '<script type="text/javascript">alert("Boleto registrado correctamente.");</script>';
+                            header("location:index.php");
+                            
+                        }else{
+                            echo '<script type="text/javascript">alert("Error al registrar.");</script>';
+                        }
+
+                    }else{
+                        echo '<script type="text/javascript">alert("No existe disponibilidad para la ubicacion seleccionada");</script>';
+                    }
+                    
                             
                 }
 
             }
         ?>
+
+        <script type = "text/javascript">
+            function cambiar(){
+                document.location = "registrar_boleto.php?event="+document.getElementById("evento").value;
+            }
+        </script>
 
     </body>
 

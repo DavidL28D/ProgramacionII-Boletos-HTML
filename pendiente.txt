@@ -1,0 +1,1 @@
+- editar y validar (sumar y restar si cambia de puesto) la cantidad de puesto en "editar"
