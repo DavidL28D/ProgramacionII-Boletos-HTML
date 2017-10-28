@@ -17,6 +17,7 @@
 
     <head>
 
+        <link rel="stylesheet" type="text/css" href="style.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -25,28 +26,45 @@
     </head>
 
     <body>
-       
+
+        <h1 class="titulos">Registro de usuario</h1>
+
         <form action="" method="post">
             <fieldset>
-                <legend><h1>Registro de usuario</h1></legend>
-                * <input type="text" name="primer_nombre" id="primer_nombre" placeholder="Primer nombre" required="required">
-                <input type="text" name="segundo_nombre" id="segundo_nombre" placeholder="Segundo nombre"><br/><br/>
-                * <input type="text" name="primer_apellido" id="primer_apellido" placeholder="Primer apellido" required="required">
-                <input type="text" name="segundo_apellido" id="segundo_apellido" placeholder="Segundo apellido"><br/><br/>
+                <p class="textos">* 
+                    <input type="text" name="primer_nombre" id="primer_nombre" placeholder="Primer nombre" required="required">
+                    <input type="text" name="segundo_nombre" id="segundo_nombre" placeholder="Segundo nombre">
+                </p>
+
+                <p class="textos">*
+                    <input type="text" name="primer_apellido" id="primer_apellido" placeholder="Primer apellido" required="required">
+                    <input type="text" name="segundo_apellido" id="segundo_apellido" placeholder="Segundo apellido"><br/><br/>
+                </p>
+
                 <input type="text" name="cedula" id="cedula" placeholder="Cedula"><br/><br/>
                 <input type="text" name="direccion" id="direccion" placeholder="Direccion"><br/><br/>
 
-                * Seleccione su sexo: 
-                <select name="sexo" id="sexo">
-                    <option value="0">Masculino</option>
-                    <option value="1">Femenino</option>
-                    <option value="2">Prefiero no decirlo</option>
-                </select><br/><br/>
+                <p class="textos">* Seleccione su sexo: 
+                    <select name="sexo" id="sexo">
+                        <option value="0">Masculino</option>
+                        <option value="1">Femenino</option>
+                        <option value="2">Prefiero no decirlo</option>
+                    </select>
+                </p>
 
                 <input type="text" name="telefono" id="telefono" placeholder="Telefono"><br/><br/>
-                * <input type="text" name="correo" id="correo" placeholder="Correo" required="required"><br/><br/>
-                * <input type="text" name="user" id="user" placeholder="Usuario" required="required"><br/><br/>
-                * <input type="password" name="pass" id="pass" placeholder="Contraseña" required="required"><br/><br/>
+
+                <p class="textos">*
+                    <input type="text" name="correo" id="correo" placeholder="Correo" required="required"><br/><br/>
+                </p>
+
+                <p class="textos">*
+                    <input type="text" name="user" id="user" placeholder="Usuario" required="required"><br/><br/>
+                </p>
+
+                <p class="textos">*
+                    <input type="password" name="pass" id="pass" placeholder="Contraseña" required="required"><br/><br/>
+                </p>
 
                 <input type="submit" name="boton" value="Registrar">
 
@@ -89,7 +107,7 @@
                     }
                 }
             ?>
-        <p>La informacion marcada con el * es obligatoria</p>
+        <p class="textos">La informacion marcada con el * es obligatoria</p>
 
     </body>
 

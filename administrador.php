@@ -17,6 +17,7 @@
 
     <head>
 
+        <link rel="stylesheet" type="text/css" href="style.css">
         <meta charset="UTF-8">
         <title>Administrador</title>
 
@@ -24,12 +25,11 @@
 
     <body>
 
-        <h1>Bienvenido.</h1>
-        <?php echo "", $_SESSION["Nombres"]." ". $_SESSION["Apellidos"];?><br/><br/>
+        <h1 class="titulos">Bienvenido.</h1>
+        <?php echo "<p class='textos'>", $_SESSION["Nombres"]." ". $_SESSION["Apellidos"]."</p>";?>
 
         <form action="" method="post">
             <fieldset>
-                <legend>Menú Principal</legend>
                 <a href="listado.php">Ver listado de Registros de asistencia por eventos</a><br><br/>
                 <a href="registrar_evento.php">Registrar Evento</a><br/><br/>
                 <a href="registrar_boleto.php">Registrar Boleto</a><br/><br/>

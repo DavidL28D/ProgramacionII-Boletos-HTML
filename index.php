@@ -17,7 +17,7 @@
 
     <head>
 
-        <link rel="stylesheet" type="text/css" href="estilos.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,18 +27,18 @@
     </head>
     
     <body>
-        <h1>INGRESAR</h1>
+        <h1 class="titulos">INGRESAR</h1>
 
         <form action="" method="post">
             <fieldset enabled=false>
                 <input type="text" name="usuario" id="usuario" placeholder="Usuario"><br/><br/>
                 <input type="password" name="contraseña" id="contraseña" placeholder="Contraseña"><br/><br/>
-                <input type="submit" name="boton" value="Entrar"><br/><br/>
+                <input type="submit" name="boton" value="Iniciar Sesion"><br/><br/>
                 <a href="registro.php">Registrarse</a>
             </fieldset>
 
             <?php
-                if(isset($_POST["boton"]) && $_POST["boton"] == "Entrar"){
+                if(isset($_POST["boton"]) && $_POST["boton"] == "Iniciar Sesion"){
                     
                     if( (isset($_POST["usuario"]) && $_POST["usuario"] != null) && (isset($_POST["contraseña"]) && $_POST["contraseña"] != null)){
                         include 'conexion.php';
@@ -72,8 +72,16 @@
                 }
                 
             ?>
-            <h3><br><br>Elaborado por:<br>David Leonardo Chacón García C.I:25.023.230<br>Yeison Bladimir Fuentes Chacón C.I:23.498.281<br><br>Proyecto PHP y MySQL<br>Programación II Sección 1</h3>
         </form>
+
+        <footer>
+        Elaborado por:
+        <br>David L. Chacón G. C.I:25.023.230.
+        <br>Yeison B. Fuentes C. C.I:23.498.281.
+        <br><br>Proyecto PHP y MySQL.
+        <br>Programación II Sección 1.
+
+        </footer>
     </body>
 
 </html>
