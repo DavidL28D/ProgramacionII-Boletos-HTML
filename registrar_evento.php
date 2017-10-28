@@ -61,10 +61,16 @@
     
                     }else{
                         
-                        $peticion = "insert into eventos values('".$_POST["nombre"]."','".$_POST["fecha"]."','".$_POST["altos"]."','".$_POST["medios"]."','".$_POST["vip"]."','".$_POST["platino"]."')"; 
+                        $peticion = "insert into eventos values('".$_POST["nombre"]."',".
+                                "'".$_POST["fecha"]."',".
+                                "'".$_POST["altos"]."',".
+                                "'".$_POST["medios"]."',".
+                                "'".$_POST["vip"]."',".
+                                "'".$_POST["platino"]."') "; 
+                        echo $peticion;
                         $resultado = $conexion->getConexion()->query($peticion);
                         
-                        if($resultado->affected_rows > 0){
+                        if($conexion->getConexion()->affected_rows>0){
                             echo '<script type="text/javascript">alert("Evento registrado correctamente.");</script>';
                             header("location:administrador.php");
                             

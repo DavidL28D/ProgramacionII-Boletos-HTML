@@ -192,7 +192,7 @@
                         $peticion = "insert into boletos values( '".$_GET["serial"]."','".$_GET["evento"]."','".$registro["Fecha"]."','".$_GET["ubicacion"]."','".$usuario."')";
                         $resultado = $conexion->getConexion()->query($peticion);
                         
-                        if($resultado->affected_rows > 0){
+                        if($conexion->getConexion()->affected_rows > 0){
                             echo '<script type="text/javascript">alert("Boleto registrado correctamente.");</script>';
                             header("location:index.php");
                             
