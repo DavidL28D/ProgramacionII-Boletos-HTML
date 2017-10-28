@@ -116,35 +116,275 @@
             <?php
                 if(isset($_POST["boton"]) && $_POST["boton"] == "Modificar"){
 
-                    $sql = "select * from boletos where Serial = '".$serial."' ";
-                    $resultado = $conexion->getConexion()->query($sql);
-                    
-                    if($resultado->num_rows > 0){
+                    echo "<br>";
 
-                        $boleto = $resultado->fetch_assoc();
+                    $serial = $_POST["serial"];
+                    $evento = $_POST["evento"];
+                    $ubicacion = $_POST["ubicacion"];
 
-                        if($serial == $boleto["Serial"]){
-                            $sql = "update boletos set Serial='".$serial."' where Serial= '".$boleto["Serial"]."'";
-                            $resultado= $conexion->getConexion()->query($sql);
+                    if($_SESSION["serial_base"] == $serial){
+                        echo "No hay cambio de serial<br/>";
+
+                    }else{
+
+                        $sql = "select * from boletos where Serial = '".$serial."' ";
+                        $resultado = $conexion->getConexion()->query($sql);
+
+                        if($resultado->num_rows > 0){
+                            echo "Existe el boleto<br/>";
                         }else{
-                            echo '<script type="text/javascript">alert("El boleto ya se encuentra registrado.");</script>';
+                            echo "Cambio el serial<br/>";
+                            /*
+                            $sql = "update boletos set Serial='".$serial."' where Serial= '".$_SESSION["Serial"]."'";
+                            $conexion->getConexion()->query($sql);
+                            //*/
                         }
 
                     }
 
+                    switch($_SESSION["ubicacion_base"]){
+                        
+                        case 0: //Altos
+                        $old= "Altos";
+                        break;
+                        
+                        case 1: //Medios
+                        $old = "Medios";
+                        break;
+                        
+                        case 2: //Vip
+                        $old = "Vip";
+                        break;
+                        
+                        case 3: //Platino
+                        $old = "Platino";
+                        break;
+
+                    }
+
+                    switch($ubicacion){
+                        
+                        case 0: //Altos
+                        $new = "Altos";
+                        break;
+                        
+                        case 1: //Medios
+                        $new = "Medios";
+                        break;
+                        
+                        case 2: //Vip
+                        $new = "Vip";
+                        break;
+                        
+                        case 3: //Platino
+                        $new = "Platino";
+                        break;
+
+                    }
+
+                    if($_SESSION["evento_base"] == $evento){
+
+                        echo "<br/>";
+                        echo "Eventos iguales.<br/>";
+                        echo "<br/>";
+
+                        if($_SESSION["ubicacion_base"] == $ubicacion){
+                            echo "Ubicaciones iguales.<br/>";
+                            echo '<script type="text/javascript">alert("Aqui actualiza boleto.");</script>';
+
+                        }else{
+                            echo "Ubicacion vieja != Ubicacion nueva.<br/>";
+                            echo "Ubicacion vieja: $old<br/>";
+                            echo "Ubicacion nueva: $new<br/>";
+
+                            $sql = "select * from eventos where Nombre = '".$evento."' ";
+                            $resultado = $conexion->getConexion()->query($sql);
+                            $registro = $resultado->fetch_assoc();
+
+                            if($registro["$new"] > 0){
+
+                                echo "<br/>Modificacion:<br/>";
+                                echo "$new -1<br/>";
+                                echo "$old +1";
+
+                                /*
+                                $x = $registro["$new"] -1;
+                                $sql = "update eventos set $new='".$x."' where Nombre= '".$evento."'";
+                                $resultado= $conexion->getConexion()->query($sql);
+
+                                $x = $registro["$old"] +1;
+                                $sql = "update eventos set $old='".$x."' where Nombre= '".$_SESSION["evento_base"]."'";
+                                $resultado= $conexion->getConexion()->query($sql);
+                                //*/
+
+                                echo '<script type="text/javascript">alert("Aqui actualiza boleto.");</script>';
+
+                            }else{
+                                echo "<br/>No existe disponibilidad en $new.";
+                            }
+
+                        }
+
+                    }else{
+
+                        echo "<br/>Evento viejo != Evento nuevo<br/>";
+                        echo "Evento viejo:".$_SESSION["evento_base"]."<br/>";
+                        echo "Evento nuevo: $evento<br/><br>";
+
+                        $sql = "select * from eventos where Nombre = '".$evento."' ";
+                        $resultado = $conexion->getConexion()->query($sql);
+                        $registro = $resultado->fetch_assoc();
+
+                        
+                        if($_SESSION["ubicacion_base"] == $ubicacion){
+                            echo "Ubicaciones iguales.<br/>";
+
+                           if($registro["$new"] > 0){
+
+                            echo "<br/>Modificacion:<br/>";
+                            echo "$new -1<br/>";
+                            echo "$old +1";
+
+                            /*
+                            $x = $registro["$new"] -1;
+                            $sql = "update eventos set $new='".$x."' where Nombre= '".$evento."'";
+                            $resultado= $conexion->getConexion()->query($sql);
+
+                            $x = $registro["$old"] +1;
+                            $sql = "update eventos set $old='".$x."' where Nombre= '".$_SESSION["evento_base"]."'";
+                            $resultado= $conexion->getConexion()->query($sql);
+                            //*/
+
+                            echo '<script type="text/javascript">alert("Aqui actualiza boleto.");</script>';
+
+                            }else{
+                                echo "<br/>No existe disponibilidad en $new.";
+                            }
+
+                        }else{
+                            echo "Ubicacion vieja != Ubicacion nueva.<br/>";
+                            echo "Ubicacion vieja: $old<br/>";
+                            echo "Ubicacion nueva: $new<br/>";
+
+                            if($registro["$new"] > 0){
+
+                                echo "<br/>Modificacion:<br/>";
+                                echo "$new -1<br/>";
+                                echo "$old +1";
+
+                                /*
+                                $x = $registro["$new"] -1;
+                                $sql = "update eventos set $new='".$x."' where Nombre= '".$evento."'";
+                                $resultado= $conexion->getConexion()->query($sql);
+
+                                $x = $registro["$old"] +1;
+                                $sql = "update eventos set $old='".$x."' where Nombre= '".$_SESSION["evento_base"]."'";
+                                $resultado= $conexion->getConexion()->query($sql);
+                                //*/
+
+                                echo '<script type="text/javascript">alert("Aqui actualiza boleto.");</script>';
+
+                            }else{
+                                echo "<br/>No existe disponibilidad en $new.";
+                            }
+
+                        }
+
+                    }
+
+                    /*
                     $sql = "select * from eventos where Nombre = '".$evento."' ";
                     $resultado = $conexion->getConexion()->query($sql);
 
                     if($resultado->num_rows > 0){
 
-                        $evento = $resultado->fetch_assoc();
+                        $e = $resultado->fetch_assoc();
+
+                        switch($e["Ubicacion"]){
+                            
+                            case 0: //Altos
+                            $new = "Altos";
+                            break;
+                            
+                            case 1: //Medios
+                            $new = "Medios";
+                            break;
+                            
+                            case 3: //Vip
+                            $new = "Vip";
+                            break;
+                            
+                            case 4: //Platino
+                            $new = "Platino";
+                            break;
+                        }
+
+                        switch($ubicacion){
+                            
+                            case 0: //Altos
+                            $old= "Altos";
+                            break;
+                            
+                            case 1: //Medios
+                            $old = "Medios";
+                            break;
+                            
+                            case 3: //Vip
+                            $old = "Vip";
+                            break;
+                            
+                            case 4: //Platino
+                            $old = "Platino";
+                            break;
+                        }
+
+                        if($evento == $e["Nombre"]){
+
+                            echo "Evento viejo = Evento nuevo <br/>";
+                            echo "Evento viejo: $evento";
+
+                            if($ubicacion == $e["Ubicacion"]){
+
+                                echo "Ubicacion vieja = Ubicacion nueva";
+                                echo '<script type="text/javascript">alert("Datos Iguales, no se modifico el boleto.");</script>';
+
+                            }else{
+
+                                echo "Ubicacion vieja != Ubicacion nueva";
+                                echo "ubicacion vieja: $old";
+                                echo "ubicacion nueva: $new";
+
+                                if($e["$new"] > 0){
+
+                                    $x = $e["$new"] - 1;
+                                    $sql = "update eventos set $new='".$x."' where Serial= '".$e["$new"]."'";
+                                    $resultado= $conexion->getConexion()->query($sql);
+
+                                    $x = $e["$old"] + 1;
+                                    $sql = "update boletos set $old='".$x."' where Serial= '".$e["$old"]."'";
+                                    $resultado= $conexion->getConexion()->query($sql);
+
+                                    echo '<script type="text/javascript">alert("Se actualizo modifico el boleto.");</script>';
+
+                                }else{
+                                    echo '<script type="text/javascript">alert("No existe disponibilidad para la ubicacion seleccionada");</script>';
+                                }
+ 
+                            }
+
+                        }else{
+
+                            if($ubicacion == $e["Ubicacion"]){
+
+                            }else{
+
+                            }
+
+                        }
 
                     }
                     
-
-                    
-                    
-                    
+                    /*
                     $sql = "select * from eventos where Nombre= '".$_POST["evento"]."' ";
                     $resultado = $conexion->getConexion()->query($sql);
                     $fecha = $resultado->fetch_assoc();
@@ -178,16 +418,15 @@
 
                         } 
                     }
-                }
+                    */
+                }//boton
              ?>
         
         <script type = "text/javascript">
             function cambiar(){
                 document.location = "editar.php?serial="+document.getElementById("serial").value+"&evento="+document.getElementById("evento").value+"&ubicacion="+document.getElementById("ubicacion").value;
             }
-			
-	 
- </script>		
+        </script>		
 
     </body>
 
