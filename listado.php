@@ -56,7 +56,7 @@
                             $ubicacion="Platino";
                         }
                         echo "<td>".$tabla["Nombres"]."</td> &nbsp&nbsp  <td>".$tabla["Apellidos"]."</td> &nbsp&nbsp<td> ".$tabla["Cedula"]."</td> &nbsp&nbsp<td>".$tabla2["Nombre"]."</td> &nbsp&nbsp<td>".$ubicacion.
-                                '</td> &nbsp&nbsp<td> <a  href="detalles.php?user='.$tabla["Usuario"].'&event='.$tabla2["Serial"].'">Detalles</a>  <a href="editar.php?event='.$tabla2["Serial"].'">Editar</a>  <a href="eliminar.php?boleto='.$tabla2["Serial"].'">Borrar</a></td><br>';
+                                '</td> &nbsp&nbsp<td> <a  href="detalles.php?user='.$tabla["Usuario"].'&event='.$tabla2["Serial"].'">Detalles</a>  <a href="editar.php?serial='.$tabla2["Serial"].'&evento='.$tabla2["Nombre"].'&ubicacion='.$tabla2["Ubicacion"].'&flag">Editar</a>  <a href="eliminar.php?boleto='.$tabla2["Serial"].'">Borrar</a></td><br>';
 
                     }
                 }                        
