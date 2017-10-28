@@ -222,22 +222,30 @@
                                 $sql = "update boletos set Serial='".$serial."', Nombre='".$evento."', Fecha='".$registroNEW["Fecha"]."', Ubicacion='".$ubicacion."' where Serial ='".$_SESSION["serial_base"]."' ";
                                 $resultado= $conexion->getConexion()->query($sql);
 
+                                echo '<script type="text/javascript">alert("Boleto Actualizado.");</script>';
+                                header("location:listado.php");
+
                             }
                             //*/
 
                         }else{
-                            $sql = "update boletos set Serial='".$serial."' where Serial ='".$_SESSION["serial_base"]."' ";
-                            $resultado= $conexion->getConexion()->query($sql);
-                        }
+                            if($old == $new){
 
-                        echo '<script type="text/javascript">alert("Boleto Actualizado.");</script>';
-                        header("location:listado.php");
+                                $sql = "update boletos set Serial='".$serial."' where Serial ='".$_SESSION["serial_base"]."' ";
+                                $resultado= $conexion->getConexion()->query($sql);
+
+                                echo '<script type="text/javascript">alert("Boleto Actualizado.");</script>';
+                                header("location:listado.php");
+
+                            }else{
+                                echo '<script type="text/javascript">alert("No existe disponibilidad para la ubicacion seleccionada.");</script>';
+                            }
+                            
+                        }
 
                     }
                 }//boton
              ?>
-        
-        
         
         <script type = "text/javascript">
             function cambiar(){
