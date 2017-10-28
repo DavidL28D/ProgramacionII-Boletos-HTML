@@ -134,7 +134,7 @@
                         $resultado = $conexion->getConexion()->query($sql);
 
                         if($resultado->num_rows > 0){
-                            //echo '<script type="text/javascript">alert("Existe un boleto con ese serial.");</script>';
+                            echo '<script type="text/javascript">alert("Existe un boleto con ese serial.");</script>';
                             $b = false;
 
                         }else{
@@ -225,12 +225,14 @@
                             }
                             //*/
 
-                            echo '<script type="text/javascript">alert("Boleto Actualizado.");</script>';
-                            header("location:listado.php");
-    
                         }else{
-                            echo "<br/>No existe disponibilidad en $new.";
+                            $sql = "update boletos set Serial='".$serial."' where Serial ='".$_SESSION["serial_base"]."' ";
+                            $resultado= $conexion->getConexion()->query($sql);
                         }
+
+                        echo '<script type="text/javascript">alert("Boleto Actualizado.");</script>';
+                        header("location:listado.php");
+
                     }
                 }//boton
              ?>
