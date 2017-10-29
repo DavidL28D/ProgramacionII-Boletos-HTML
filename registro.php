@@ -34,25 +34,25 @@
             <fieldset>
 
                 <p class="textos"> 
-                    * <input type="text" name="primer_nombre" id="primer_nombre" placeholder="Primer nombre" required="required">
-                    <input type="text" name="segundo_nombre" id="segundo_nombre" placeholder="Segundo nombre"><br/><br/>
+                    * <input type="text" name="primer_nombre" id="primer_nombre" placeholder="Primer nombre" required="required" <?php if(isset($_POST["primer_nombre"])) echo 'value="'.$_POST["primer_nombre"].'"'; ?>>
+                    <input type="text" name="segundo_nombre" id="segundo_nombre" placeholder="Segundo nombre" <?php if(isset($_POST["segundo_nombre"])) echo 'value="'.$_POST["segundo_nombre"].'"'; ?> ><br/><br/>
                 
-                    * <input type="text" name="primer_apellido" id="primer_apellido" placeholder="Primer apellido" required="required">
-                    <input type="text" name="segundo_apellido" id="segundo_apellido" placeholder="Segundo apellido"><br/><br/>
+                    * <input type="text" name="primer_apellido" id="primer_apellido" placeholder="Primer apellido" required="required" <?php if(isset($_POST["primer_apellido"])) echo 'value="'.$_POST["primer_apellido"].'"'; ?> >
+                    <input type="text" name="segundo_apellido" id="segundo_apellido" placeholder="Segundo apellido" <?php if(isset($_POST["segundo_apellido"])) echo 'value="'.$_POST["segundo_apellido"].'"'; ?> ><br/><br/>
                 
-                    <input type="text" name="cedula" id="cedula" placeholder="Cedula"><br/><br/>
-                    <input type="text" name="direccion" id="direccion" placeholder="Direccion"><br/><br/>
+                    <input type="text" name="cedula" id="cedula" placeholder="Cedula" <?php if(isset($_POST["cedula"])) echo 'value="'.$_POST["cedula"].'"'; ?> ><br/><br/>
+                    <input type="text" name="direccion" id="direccion" placeholder="Direccion" <?php if(isset($_POST["direccion"])) echo 'value="'.$_POST["direccion"].'"'; ?>><br/><br/>
 
                     * Seleccione su sexo: 
                     <select name="sexo" id="sexo">
-                        <option value="0">Masculino</option>
-                        <option value="1">Femenino</option>
-                        <option value="2">Prefiero no decirlo</option>
+                        <option value="0" <?php if(isset($_POST["sexo"]) && $_POST["sexo"] == 0) echo 'selected="selected"'; ?>>Masculino</option>
+                        <option value="1" <?php if(isset($_POST["sexo"]) && $_POST["sexo"] == 1) echo 'selected="selected"'; ?>>Femenino</option>
+                        <option value="2" <?php if(isset($_POST["sexo"]) && $_POST["sexo"] == 2) echo 'selected="selected"'; ?>>Prefiero no decirlo</option>
                     </select><br/><br/>
                 
-                    <input type="text" name="telefono" id="telefono" placeholder="Telefono"><br/><br/>
-                    * <input type="text" name="correo" id="correo" placeholder="Correo" required="required"><br/><br/>
-                    * <input type="text" name="user" id="user" placeholder="Usuario" required="required"><br/><br/>
+                    <input type="text" name="telefono" id="telefono" placeholder="Telefono" <?php if(isset($_POST["telefono"])) echo 'value="'.$_POST["telefono"].'"'; ?>><br/><br/>
+                    * <input type="text" name="correo" id="correo" placeholder="Correo" required="required" <?php if(isset($_POST["correo"])) echo 'value="'.$_POST["correo"].'"'; ?>><br/><br/>
+                    * <input type="text" name="user" id="user" placeholder="Usuario" required="required" <?php if(isset($_POST["user"])) echo 'value="'.$_POST["user"].'"'; ?>><br/><br/>
                     * <input type="password" name="pass" id="pass" placeholder="Contraseña" required="required"><br/><br/>
                
                 </p>

@@ -30,7 +30,7 @@
         <form action="" method="get">
 
             <p class="textos">
-            <input type="number" name="serial" id="serial" placeholder="Serial" required="required"><br/><br/>
+            <input type="number" name="serial" id="serial" placeholder="Serial" required="required" <?php if(isset($_GET["serial"]) ) echo 'value="'.$_GET["serial"].'"'; ?>><br/><br/>
 
             <?php
                 if($_SESSION["Rol"] == 1){
@@ -47,7 +47,13 @@
 
                          while($usuario = $resultado->fetch_assoc()){
                              if($usuario["Rol"] != 1){
-                                 echo "<option value=".$usuario["Usuario"].">".$usuario["Usuario"]."</option>";
+
+                                if(isset($_GET["user"]) && $_GET["user"] == $usuario["Usuario"]){
+                                    echo "<option value=".$usuario["Usuario"]." selected='selected'>".$usuario["Usuario"]."</option>";
+                                }else{
+                                    echo "<option value=".$usuario["Usuario"].">".$usuario["Usuario"]."</option>";
+                                }
+                                 
                              }
                              
                          }
@@ -68,7 +74,12 @@
 
                 if($resultado->num_rows > 0){
                     
-                    echo 'Seleccione Evento: <select name="evento" id="evento" onchange="cambiar()">';
+                    if($_SESSION["Rol"] == 1){
+                        echo 'Seleccione Evento: <select name="evento" id="evento" onchange="cambiarAdmin()">';
+                    }else{
+                        echo 'Seleccione Evento: <select name="evento" id="evento" onchange="cambiarUser()">';
+                    }
+                    
                     
                     $i = 0;
                      while($evento = $resultado->fetch_assoc()){
@@ -107,10 +118,10 @@
 
             Seleccione ubicacion: 
                 <select name="ubicacion" id="ubicacion">
-                    <option value="0">Altos</option>
-                    <option value="1">Medios</option>
-                    <option value="2">VIP</option>
-                    <option value="3">Platino</option>
+                    <option value="0" <?php if(isset($_GET["ubicacion"]) && $_GET["ubicacion"] == 0) echo 'selected="selected"'; ?>>Altos</option>
+                    <option value="1" <?php if(isset($_GET["ubicacion"]) && $_GET["ubicacion"] == 1) echo 'selected="selected"'; ?>>Medios</option>
+                    <option value="2" <?php if(isset($_GET["ubicacion"]) && $_GET["ubicacion"] == 2) echo 'selected="selected"'; ?>>VIP</option>
+                    <option value="3" <?php if(isset($_GET["ubicacion"]) && $_GET["ubicacion"] == 3) echo 'selected="selected"'; ?>>Platino</option>
                 </select><br/><br/><br/>
 
                 <input type="submit" formnovalidate name="boton" value="Volver">
@@ -224,8 +235,12 @@
         ?>
 
         <script type = "text/javascript">
-            function cambiar(){
-                document.location = "registrar_boleto.php?event="+document.getElementById("evento").value;
+            function cambiarUser(){
+                document.location = "registrar_boleto.php?event="+document.getElementById("evento").value+"&serial="+document.getElementById("serial").value+"&ubicacion="+document.getElementById("ubicacion").value;
+            }
+
+            function cambiarAdmin(){
+                document.location = "registrar_boleto.php?event="+document.getElementById("evento").value+"&serial="+document.getElementById("serial").value+"&ubicacion="+document.getElementById("ubicacion").value+"&user="+document.getElementById("usuario").value;
             }
         </script>
 
