@@ -22,7 +22,9 @@
 <html lang="en">
 
     <head>
+    
 
+        <link rel="stylesheet" type="text/css" href="style.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -31,6 +33,7 @@
     </head>
 
     <body>
+    <div id="contenedor">
 
         <?php
 
@@ -46,6 +49,7 @@
 
         }
 
+        /*
         echo "Datos registrados: <br/>";
         echo "Serial: ".$_SESSION["serial_base"].".<br/>";
         echo "Evento: ".$_SESSION["evento_base"].".<br/>";
@@ -68,12 +72,15 @@
             break;
         }
         echo"<br/><br/>";
+        //*/
         ?>
 
+        <h1 class="titulos">Edicion de boleto.</h1>
         <form action="" method="post">
 
+            <p class="textos">
             Serial: <input type="number" name="serial" id="serial" placeholder="Serial" required="required" value='<?php echo $serial ?>'><br/><br/>
-           
+            
             <?php
                 $conexion = new Conectar();
                 $conexion->ConectarBD();
@@ -115,7 +122,9 @@
                     <option value="3" <?php if($ubicacion == 3) echo "selected='selected'";?>>Platino</option>
                 </select><br/><br/><br/>
 
+            <input type="submit" name="boton" value="Volver">
             <input type="submit" name="boton" value="Modificar">
+            </p>
         </form>
 
             <?php
@@ -244,6 +253,8 @@
                         }
 
                     }
+                }else if(isset($_POST["boton"]) && $_POST["boton"] == "Volver"){
+                    header("location:listado.php");
                 }//boton
              ?>
         
@@ -253,6 +264,7 @@
             }
         </script>		
 
+        </div>
     </body>
 
 </html>

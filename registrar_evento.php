@@ -15,6 +15,7 @@
 
     <head>
 
+        <link rel="stylesheet" type="text/css" href="style.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -23,22 +24,25 @@
     </head>
 
     <body>
+    <div id="contenedor">
 
-        <h1>Registro de eventos</h1>
+        <h1 class="titulos">Registro de eventos</h1>
 
         <form action="" method="post">
 
-            <p>Nombre del evento: <input type="text" name="nombre" id="nombre" required="required" <?php  ?>></p>
-            <p>Fecha del evento: <input type="date" name="fecha" id="fecha" required="required"></p>
+            <p class="textos">
+            Nombre del evento: <input type="text" name="nombre" id="nombre" required="required" <?php  ?>><br/>
+            Fecha del evento: <input type="date" name="fecha" id="fecha" required="required"><br/><br/>
 
             Disponibilidad: <br/><br/>
-            <input type="number" name="altos" id="altos" required="required"> altos<br/>
-            <input type="number" name="medios" id="medios" required="required"> Medios<br/>
-            <input type="number" name="vip" id="vip" required="required"> Vip<br/>
-            <input type="number" name="platino" id="platino" required="required"> Platino<br/><br/>
+            <input type="number" name="altos" id="altos" required="required" placeholder="Altos"><br/>
+            <input type="number" name="medios" id="medios" required="required" placeholder="Medios"><br/>
+            <input type="number" name="vip" id="vip" required="required" placeholder="Vip"><br/>
+            <input type="number" name="platino" id="platino" required="required" placeholder="Platino"><br/><br/>
 
+            <input type="submit" name="boton" value="Volver">
             <input type="submit" name="boton" value="Registrar">
-
+            </p>
         </form>
 
         <?php
@@ -84,9 +88,12 @@
                 
 
 
-            }
+            }else if(isset($_POST["boton"]) && $_POST["boton"] == "Volver"){
+                header("location:index.php");
+            }//boton
         ?>
 
+    </div>
     </body>
 
 </html>

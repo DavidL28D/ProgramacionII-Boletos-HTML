@@ -14,6 +14,7 @@
 
     <head>
 
+        <link rel="stylesheet" type="text/css" href="style.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -22,11 +23,13 @@
     </head>
 
     <body>
+    <div id="contenedor">
 
-        <h1>Registro de boletos</h1>
+        <h1 class="titulos">Registro de boletos</h1>
 
         <form action="" method="get">
 
+            <p class="textos">
             <input type="number" name="serial" id="serial" placeholder="Serial" required="required"><br/><br/>
 
             <?php
@@ -76,6 +79,7 @@
                                 $variable = $evento["Nombre"];
                             }else{
                                 echo '<option value="'.$evento["Nombre"].'">'.$evento["Nombre"].'</option>';
+                                $variable = $_GET["event"];
                             }
                         }else{
                             echo '<option value="'.$evento["Nombre"].'">'.$evento["Nombre"].'</option>';
@@ -109,7 +113,9 @@
                     <option value="3">Platino</option>
                 </select><br/><br/><br/>
 
+            <input type="submit" name="boton" value="Volver">
             <input type="submit" name="boton" value="Registrar">
+            </p>
         </form>
 
         <?php
@@ -207,7 +213,9 @@
                             
                 }
 
-            }
+            }else if(isset($_POST["boton"]) && $_POST["boton"] == "Volver"){
+                header("location:index.php");
+            }//boton
         ?>
 
         <script type = "text/javascript">
@@ -216,6 +224,7 @@
             }
         </script>
 
+    </div>
     </body>
 
 </html>

@@ -17,15 +17,17 @@
 
     <head>
 
+        <link rel="stylesheet" type="text/css" href="style.css">
         <meta charset="UTF-8">
         <title>Cliente</title>
 
     </head>
 
     <body>
+    <div id="contenedor">
 
-        <h1>Bienvenido.</h1>
-        <?php echo "", $_SESSION["Nombres"]." ". $_SESSION["Apellidos"];?><br/><br/>
+        <h1 class="titulos">Bienvenido.</h1>
+        <?php echo "<p class='subtitulos'>", $_SESSION["Nombres"]." ". $_SESSION["Apellidos"]."</p>";?><br/>
 
         <form action="" method="post">
             <a href="registrar_boleto.php">Registrar boleto</a><br/><br/>
@@ -37,6 +39,7 @@
                 header("location:cerrar.php");
             }
         ?>
-        
+    
+        </div>
     </body>
 </html>

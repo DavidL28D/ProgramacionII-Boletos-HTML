@@ -18,7 +18,6 @@
     <head>
 
         <link rel="stylesheet" type="text/css" href="style.css">
-
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -27,6 +26,8 @@
     </head>
     
     <body>
+    <div id="contenedor">
+
         <h1 class="titulos">INGRESAR</h1>
 
         <form action="" method="post">
@@ -82,6 +83,8 @@
         <br>Programación II Sección 1.
 
         </footer>
+    
+    </div>
     </body>
 
 </html>

@@ -26,46 +26,38 @@
     </head>
 
     <body>
+    <div id="contenedor">
 
         <h1 class="titulos">Registro de usuario</h1>
 
         <form action="" method="post">
             <fieldset>
-                <p class="textos">* 
-                    <input type="text" name="primer_nombre" id="primer_nombre" placeholder="Primer nombre" required="required">
-                    <input type="text" name="segundo_nombre" id="segundo_nombre" placeholder="Segundo nombre">
-                </p>
 
-                <p class="textos">*
-                    <input type="text" name="primer_apellido" id="primer_apellido" placeholder="Primer apellido" required="required">
+                <p class="textos"> 
+                    * <input type="text" name="primer_nombre" id="primer_nombre" placeholder="Primer nombre" required="required">
+                    <input type="text" name="segundo_nombre" id="segundo_nombre" placeholder="Segundo nombre"><br/><br/>
+                
+                    * <input type="text" name="primer_apellido" id="primer_apellido" placeholder="Primer apellido" required="required">
                     <input type="text" name="segundo_apellido" id="segundo_apellido" placeholder="Segundo apellido"><br/><br/>
-                </p>
+                
+                    <input type="text" name="cedula" id="cedula" placeholder="Cedula"><br/><br/>
+                    <input type="text" name="direccion" id="direccion" placeholder="Direccion"><br/><br/>
 
-                <input type="text" name="cedula" id="cedula" placeholder="Cedula"><br/><br/>
-                <input type="text" name="direccion" id="direccion" placeholder="Direccion"><br/><br/>
-
-                <p class="textos">* Seleccione su sexo: 
+                    * Seleccione su sexo: 
                     <select name="sexo" id="sexo">
                         <option value="0">Masculino</option>
                         <option value="1">Femenino</option>
                         <option value="2">Prefiero no decirlo</option>
-                    </select>
+                    </select><br/><br/>
+                
+                    <input type="text" name="telefono" id="telefono" placeholder="Telefono"><br/><br/>
+                    * <input type="text" name="correo" id="correo" placeholder="Correo" required="required"><br/><br/>
+                    * <input type="text" name="user" id="user" placeholder="Usuario" required="required"><br/><br/>
+                    * <input type="password" name="pass" id="pass" placeholder="Contraseña" required="required"><br/><br/>
+               
                 </p>
 
-                <input type="text" name="telefono" id="telefono" placeholder="Telefono"><br/><br/>
-
-                <p class="textos">*
-                    <input type="text" name="correo" id="correo" placeholder="Correo" required="required"><br/><br/>
-                </p>
-
-                <p class="textos">*
-                    <input type="text" name="user" id="user" placeholder="Usuario" required="required"><br/><br/>
-                </p>
-
-                <p class="textos">*
-                    <input type="password" name="pass" id="pass" placeholder="Contraseña" required="required"><br/><br/>
-                </p>
-
+                <input type="submit" name="boton" value="Volver">
                 <input type="submit" name="boton" value="Registrar">
 
             </fieldset>
@@ -105,10 +97,14 @@
                             echo '<script type="text/javascript">alert("Error al registrar.");</script>';
                         }    
                     }
-                }
+                }else if(isset($_POST["boton"]) && $_POST["boton"] == "Volver"){
+                    header("location:index.php");
+                }//boton
+                
             ?>
         <p class="textos">La informacion marcada con el * es obligatoria</p>
 
+    </div>
     </body>
 
 </html>

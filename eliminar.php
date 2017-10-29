@@ -14,22 +14,26 @@
 <html>
 
     <head>
-    
+
+        <link rel="stylesheet" type="text/css" href="style.css">
         <meta charset="UTF-8">
         <title>Eliminar</title>
 
     </head>
 
     <body>
+    <div id="contenedor">
+
         <?php
             include 'conexion.php';
             $con=new Conectar();
             $con->ConectarBD();
             $sql="delete from boletos where Serial='".$_GET["boleto"]."'";
             $result=$con->getConexion()->query($sql);
-            echo 'Se ha borrado correctamente el registro seleccionado<br><br> <a href="listado.php">Volver</a>';
+            echo '<h1 class="titulos">Se ha borrado correctamente el registro seleccionado<br><br></h1> <a href="listado.php">Volver</a>';
            
         ?>
+    </div>
     </body>
     
 </html>

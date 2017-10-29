@@ -6,6 +6,7 @@
 
     <head>
 
+        <link rel="stylesheet" type="text/css" href="style.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -14,8 +15,9 @@
     </head>
 
     <body>
+    <div id="contenedor">
 
-        <h1>Destalles</h1>
+        <h1 class="titulos">Destalles</h1>
 
         <?php
 
@@ -25,7 +27,7 @@
 
             if($_SESSION["Rol"] == 1){  
 
-                echo '<h2>Del usuario</h2>';
+                echo '<h2 class="subtitulos">Del usuario</h2>';
             
                 $sql= "select * from clientes where Usuario='".$_GET["user"]."'"; 
                 $resultado= $conexion->getConexion()->query($sql);
@@ -33,6 +35,7 @@
                 if($resultado->num_rows>0){
             
                     $fila=mysqli_fetch_array($resultado,MYSQLI_ASSOC);
+                    echo '<p class="textos">';
                     echo "Nombre: ".$fila["Nombres"]."<br/>";
                     echo "Apellido: ".$fila["Apellidos"]."<br/>";
                     echo "Cedula: ".$fila["Cedula"]."<br/>";
@@ -46,12 +49,12 @@
                     }
                     echo "Telefono: ".$fila["Telefono"]."<br/>";
                     echo "Correo: ".$fila["Correo"]."<br/>";
-            
+                    echo '</p>';
                 }
             }
         ?>
         
-        <h2>Del boleto</h2>
+        <h2 class="subtitulos">Del boleto</h2>
         <?php
         
             $sql= "select * from boletos where Serial='".$_GET["event"]."'"; 
@@ -61,6 +64,7 @@
 
                     $fila=mysqli_fetch_array($resultado,MYSQLI_ASSOC);
 
+                    echo '<p class="textos">';
                     echo "Serial: ".$fila["Serial"]."<br/>";
                     echo "Nombre del evento: ".$fila["Nombre"]."<br/>";
                     echo "Fecha: ".$fila["Fecha"]."<br/>";
@@ -74,7 +78,7 @@
                     }else if($fila["Ubicacion"] == 0){
                         echo "Ubicacion: Platino.<br/>";
                     }
-
+                    echo '</p>';
             }
 
         ?>
@@ -92,7 +96,7 @@
                 }
             }
         ?>
-
+    </div>
     </body>
 
 </html>

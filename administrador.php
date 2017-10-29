@@ -24,9 +24,10 @@
     </head>
 
     <body>
+    <div id="contenedor">
 
         <h1 class="titulos">Bienvenido.</h1>
-        <?php echo "<p class='textos'>", $_SESSION["Nombres"]." ". $_SESSION["Apellidos"]."</p>";?>
+        <?php echo "<p class='subtitulos'>", $_SESSION["Nombres"]." ". $_SESSION["Apellidos"]."</p>";?>
 
         <form action="" method="post">
             <fieldset>
@@ -43,6 +44,7 @@
             }
         ?>
 
+    </div>
     </body>
 
 </html>
