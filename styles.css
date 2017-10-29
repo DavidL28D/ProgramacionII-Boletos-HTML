@@ -24,7 +24,7 @@ footer{
 
 table{
     margin: auto;
-    //text-align: center;
+    text-align: center;
     border-collapse: collapse;
     background-color: white;
     border: 2px solid black;
