@@ -14,7 +14,7 @@
 
     <head>
 
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="styles.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -113,7 +113,7 @@
                     <option value="3">Platino</option>
                 </select><br/><br/><br/>
 
-            <input type="submit" name="boton" value="Volver">
+                <input type="submit" formnovalidate name="boton" value="Volver">
             <input type="submit" name="boton" value="Registrar">
             </p>
         </form>
@@ -199,8 +199,13 @@
                         $resultado = $conexion->getConexion()->query($peticion);
                         
                         if($conexion->getConexion()->affected_rows > 0){
-                            echo '<script type="text/javascript">alert("Boleto registrado correctamente.");</script>';
-                            header("location:index.php");
+                            echo '<script type="text/javascript">alert("Boleto registrado correctamente.");';
+                            if($_SESSION["Rol"]==0){
+                            echo 'window.location.href="index.php";';
+                            }else{
+                                echo 'window.location.href="administrador.php";';
+                            }
+                            echo '</script>';
                             
                         }else{
                             echo '<script type="text/javascript">alert("Error al registrar.");</script>';
@@ -213,8 +218,8 @@
                             
                 }
 
-            }else if(isset($_POST["boton"]) && $_POST["boton"] == "Volver"){
-                header("location:index.php");
+            }else if(isset($_GET["boton"]) && $_GET["boton"] == "Volver"){
+                header("location:administrador.php");
             }//boton
         ?>
 

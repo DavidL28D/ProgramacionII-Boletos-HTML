@@ -15,7 +15,7 @@
 
     <head>
 
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="styles.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -40,7 +40,7 @@
             <input type="number" name="vip" id="vip" required="required" placeholder="Vip"><br/>
             <input type="number" name="platino" id="platino" required="required" placeholder="Platino"><br/><br/>
 
-            <input type="submit" name="boton" value="Volver">
+            <input type="submit" formnovalidate name="boton" value="Volver">
             <input type="submit" name="boton" value="Registrar">
             </p>
         </form>
@@ -75,8 +75,9 @@
                         $resultado = $conexion->getConexion()->query($peticion);
                         
                         if($conexion->getConexion()->affected_rows>0){
-                            echo '<script type="text/javascript">alert("Evento registrado correctamente.");</script>';
-                            header("location:administrador.php");
+                            echo '<script type="text/javascript">alert("Evento registrado correctamente.");
+                            window.location.href="administrador.php";</script>';
+                           
                             
                         }else{
                             echo '<script type="text/javascript">alert("Error al registrar.");</script>';

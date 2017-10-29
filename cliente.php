@@ -17,7 +17,7 @@
 
     <head>
 
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="styles.css">
         <meta charset="UTF-8">
         <title>Cliente</title>
 

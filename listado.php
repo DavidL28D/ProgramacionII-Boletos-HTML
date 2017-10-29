@@ -16,16 +16,17 @@
 <html>
 
     <head>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="styles.css">
         <meta charset="UTF-8">
         <title>Listado de eventos</title>
 
     </head>
 
     <body>
-    <div id="contenedor">
+        <div id="contenedor">
+    
 
-        <h1 class="titulos">Listado de Eventos</h1>
+        <h1 class="titulos">Listado de Eventos</h1><br><br>
         
         <?php
         include 'conexion.php';
@@ -34,12 +35,11 @@
         $conec->ConectarBD();
         $sql= "select * from clientes order by Nombres";
         $resultado= $conec->getConexion()->query($sql);
-        //echo $resultado->num_rows;
         if($resultado->num_rows>0){
            
             echo '<p class="textos"> ';
             echo '<table>';
-            echo '<tr><th>Nombres</th><th>Apellidos</th><th>Cedula</th><th>Nombre del Evento</th><th>Ubicacion</th><th>Detalles y Modificar</th>';
+            echo '<tr><th>Nombres</th><th>Apellidos</th><th>Cedula</th><th>Nombre del Evento</th><th>Ubicacion</th><th>Detalles y Modificar</th></tr>';
              
         while($tabla=$resultado->fetch_assoc()){
              
@@ -61,7 +61,7 @@
                             $ubicacion="Platino";
                         }
                         echo " <tr ><td>".$tabla["Nombres"]."</td><td>".$tabla["Apellidos"]."</td><td> ".$tabla["Cedula"]."</td><td>".$tabla2["Nombre"]."</td><td>".$ubicacion.
-                                '</td><td> <a  href="detalles.php?user='.$tabla["Usuario"].'&event='.$tabla2["Serial"].'">Detalles</a>  <a href="editar.php?serial='.$tabla2["Serial"].'&evento='.$tabla2["Nombre"].'&ubicacion='.$tabla2["Ubicacion"].'&flag">Editar</a>  <a href="eliminar.php?boleto='.$tabla2["Serial"].'">Borrar</a></td></tr><br>';
+                                '</td><td> <a  href="detalles.php?user='.$tabla["Usuario"].'&event='.$tabla2["Serial"].'">Detalles</a>  <a href="editar.php?serial='.$tabla2["Serial"].'&evento='.$tabla2["Nombre"].'&ubicacion='.$tabla2["Ubicacion"].'&flag">Editar</a>  <a href="eliminar.php?boleto='.$tabla2["Serial"].'">Borrar</a></td></tr>';
 
                     }
                            
@@ -71,7 +71,6 @@
         }if($vacia){         
                             echo 'Aun no hay boletos Registrados<br><br><a href="administrador.php">Volver</a>';            
         }
-        echo '</tr>';
         } 
          echo"</table>";
          echo'</p>';
@@ -88,6 +87,6 @@
                 }
             }
         ?>
-    </div>
+        </div>
     </body>
 </html>

@@ -17,7 +17,7 @@
 
     <head>
 
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="styles.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -26,7 +26,7 @@
     </head>
 
     <body>
-    <div id="contenedor">
+    
 
         <h1 class="titulos">Registro de usuario</h1>
 
@@ -57,7 +57,7 @@
                
                 </p>
 
-                <input type="submit" name="boton" value="Volver">
+                <input type="submit" formnovalidate name="boton" value="Volver">
                 <input type="submit" name="boton" value="Registrar">
 
             </fieldset>
@@ -89,7 +89,8 @@
                         $resultado=$conec->getConexion()->query($peticion);
                         
                         if($conec->getConexion()->affected_rows>0){
-                            echo '<script type="text/javascript">alert("Usuario registrado satisfactoriamente.");</script>';
+                            echo '<script type="text/javascript">alert("Usuario registrado satisfactoriamente.");
+                            window.location.href="index.php";</script>';
                             unset($_POST["boton"]);
                             header("location:index.php");
                             
@@ -104,7 +105,7 @@
             ?>
         <p class="textos">La informacion marcada con el * es obligatoria</p>
 
-    </div>
+   
     </body>
 
 </html>
