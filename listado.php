@@ -75,7 +75,7 @@
                 }
                 
         }if($vacia){         
-                            echo 'Aun no hay boletos Registrados<br><br>';            
+                            echo '<p class="subtitulos"> Aun no hay boletos Registrados </p>';            
         }
         } 
          echo"</table>";
