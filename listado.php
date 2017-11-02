@@ -31,17 +31,17 @@
         <?php
         include 'conexion.php';
         $vacia=true;
+        $registros=true;
         $conec = new Conectar();
         $conec->ConectarBD();
         $sql= "select * from clientes order by Nombres";
         $resultado= $conec->getConexion()->query($sql);
         if($resultado->num_rows>0){
            
-            echo '<p class="textos"> ';
-            echo '<table>';
-            echo '<tr><th>Nombres</th><th>Apellidos</th><th>Cedula</th><th>Nombre del Evento</th><th>Ubicacion</th><th>Detalles y Modificar</th></tr>';
+            
              
         while($tabla=$resultado->fetch_assoc()){
+           
              
             $sql2= "select * from boletos where Usuario='".$tabla["Usuario"]."'";
             $resultado2= $conec->getConexion()->query($sql2);
@@ -60,6 +60,12 @@
                         if($tabla2["Ubicacion"]==3){
                             $ubicacion="Platino";
                         }
+                         if($registros){
+                            echo '<p class="textos"> ';
+                            echo '<table>';
+                            echo '<tr><th>Nombres</th><th>Apellidos</th><th>Cedula</th><th>Nombre del Evento</th><th>Ubicacion</th><th>Detalles y Modificar</th></tr>';
+                            $registros=false;
+                         }
                         echo " <tr ><td>".$tabla["Nombres"]."</td><td>".$tabla["Apellidos"]."</td><td> ".$tabla["Cedula"]."</td><td>".$tabla2["Nombre"]."</td><td>".$ubicacion.
                                 '</td><td> <a  href="detalles.php?user='.$tabla["Usuario"].'&event='.$tabla2["Serial"].'">Detalles</a>  <a href="editar.php?serial='.$tabla2["Serial"].'&evento='.$tabla2["Nombre"].'&ubicacion='.$tabla2["Ubicacion"].'&flag">Editar</a>  <a href="eliminar.php?boleto='.$tabla2["Serial"].'">Borrar</a></td></tr>';
 
@@ -69,7 +75,7 @@
                 }
                 
         }if($vacia){         
-                            echo 'Aun no hay boletos Registrados<br><br><a href="administrador.php">Volver</a>';            
+                            echo 'Aun no hay boletos Registrados<br><br>';            
         }
         } 
          echo"</table>";
